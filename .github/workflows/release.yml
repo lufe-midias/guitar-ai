@@ -1,0 +1,75 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-mac:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg + tcl-tk
+        run: |
+          brew install ffmpeg python-tk@3.12
+
+      - name: Cache torch checkpoints
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/torch
+          key: torch-checkpoints-v1
+
+      - name: Install Python deps
+        working-directory: apps/engine
+        run: |
+          python3 -m venv --system-site-packages .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -e .
+          pip install demucs spotdl pyinstaller cairosvg neural-amp-modeler
+
+      - name: Build engine bundle (PyInstaller)
+        working-directory: apps/engine
+        run: |
+          source .venv/bin/activate
+          python build_engine.py
+
+      - name: Install UI deps
+        working-directory: apps/desktop
+        run: npm ci
+
+      - name: Build icon
+        working-directory: apps/engine
+        run: |
+          source .venv/bin/activate
+          python ../../scripts/build_icon.py
+
+      - name: Build + publish .dmg
+        working-directory: apps/desktop
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional code-signing secrets — leave unset to ship unsigned builds
+          CSC_LINK: ${{ secrets.MAC_CERTIFICATE_BASE64 }}
+          CSC_KEY_PASSWORD: ${{ secrets.MAC_CERTIFICATE_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          npm run build
+          npx electron-builder --mac --publish always

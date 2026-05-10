@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+/* =========================================================================
+   GUITAR AI — Lufe OS Holographic Command Deck
+   ========================================================================= */
+
+@theme {
+  --color-background: hsl(220 30% 8%);
+  --color-foreground: hsl(210 40% 98%);
+  --color-card: hsl(222 26% 12%);
+  --color-card-fg: hsl(210 40% 98%);
+  --color-muted: hsl(217 19% 15%);
+  --color-muted-fg: hsl(215 16% 70%);
+  --color-border: hsl(219 20% 20%);
+
+  --color-coral: hsl(11 89% 61%);
+  --color-cyan: hsl(191 75% 44%);
+  --color-purple: hsl(268 78% 65%);
+  --color-magenta: hsl(328 82% 52%);
+
+  --color-status-online: hsl(152 76% 52%);
+  --color-status-degraded: hsl(38 95% 58%);
+  --color-status-offline: hsl(0 84% 60%);
+  --color-status-maintenance: hsl(217 91% 60%);
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+}
+
+:root {
+  --shell: 223 31% 10%;
+  --shell-elevated: 223 26% 13%;
+  --shell-soft: 220 22% 18%;
+  --shell-line: 216 18% 21%;
+  --lufe-coral: 11 89% 61%;
+  --lufe-cyan: 191 75% 44%;
+  --lufe-purple: 268 78% 65%;
+  --lufe-magenta: 328 82% 52%;
+  --status-online: 152 76% 52%;
+  --status-degraded: 38 95% 58%;
+  --status-offline: 0 84% 60%;
+  --tracking-hud: 0.22em;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-warp: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: hsl(220 30% 8%);
+  color: hsl(210 40% 98%);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+  overflow: hidden;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at top left,  hsl(var(--lufe-cyan) / 0.16),  transparent 22rem),
+    radial-gradient(circle at top right, hsl(var(--lufe-coral) / 0.12), transparent 24rem),
+    radial-gradient(circle at bottom right, hsl(var(--lufe-purple) / 0.10), transparent 22rem),
+    linear-gradient(180deg, hsl(var(--shell)) 0%, hsl(220 30% 6%) 100%);
+}
+
+::selection { background: hsl(var(--lufe-coral) / 0.34); color: white; }
+
+/* ---------- Type utilities ---------- */
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: var(--tracking-hud);
+  text-transform: uppercase;
+  color: hsl(215 16% 70%);
+  font-weight: 500;
+}
+.t-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+.t-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.t-numeric { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.t-gradient {
+  background: linear-gradient(135deg, hsl(var(--lufe-coral)), hsl(var(--lufe-cyan)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Glass surfaces ---------- */
+.app-panel {
+  position: relative;
+  border-radius: 20px;
+  background: linear-gradient(180deg, hsl(222 26% 12% / 0.94), hsl(222 26% 12% / 0.88));
+  border: 1px solid hsl(var(--shell-line) / 0.92);
+  box-shadow: 0 24px 60px rgba(2,6,23,0.32), inset 0 1px 0 rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+}
+.app-panel-soft {
+  border-radius: 16px;
+  background: hsl(var(--shell-elevated) / 0.72);
+  border: 1px solid hsl(var(--shell-line) / 0.82);
+  backdrop-filter: blur(12px);
+}
+.app-kpi {
+  border-radius: 20px;
+  padding: 20px;
+  background: linear-gradient(180deg, hsl(var(--shell-elevated) / 0.92), hsl(var(--shell-soft) / 0.92));
+  border: 1px solid hsl(var(--shell-line) / 0.9);
+  transition: transform 200ms var(--ease-smooth);
+}
+.app-kpi:hover { transform: translateY(-2px); }
+
+/* ---------- HUD grid overlay ---------- */
+.hud-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(hsl(var(--shell-line) / 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--shell-line) / 0.18) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, rgba(255,255,255,0.35), transparent 85%);
+  opacity: 0.28;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 8px 14px; border-radius: 10px; font-weight: 500; font-size: 14px;
+  border: 1px solid hsl(var(--shell-line) / 0.9);
+  background: hsl(var(--shell-soft) / 0.6);
+  color: hsl(210 40% 98%);
+  transition: all 150ms var(--ease-smooth);
+  cursor: pointer; user-select: none;
+}
+.btn:hover { background: hsl(var(--shell-soft) / 0.9); border-color: hsl(var(--lufe-coral) / 0.4); }
+.btn:active { transform: scale(0.98); }
+.btn.primary {
+  background: linear-gradient(135deg, hsl(var(--lufe-coral) / 0.95), hsl(var(--lufe-magenta) / 0.85));
+  border-color: hsl(var(--lufe-coral) / 0.4);
+  box-shadow: 0 0 24px hsl(var(--lufe-coral) / 0.45);
+  color: white;
+}
+.btn.primary:hover { box-shadow: 0 0 36px hsl(var(--lufe-coral) / 0.6); }
+.btn.ghost { background: transparent; border-color: transparent; }
+.btn.ghost:hover { background: hsl(0 0% 100% / 0.05); }
+.btn.icon { padding: 8px; aspect-ratio: 1; }
+
+/* ---------- Animations ---------- */
+@keyframes pulse-aura {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--lufe-cyan) / 0.45); }
+  50%      { box-shadow: 0 0 0 14px hsl(var(--lufe-cyan) / 0); }
+}
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes orbit-slow { to { transform: rotate(360deg); } }
+.pulse-aura { animation: pulse-aura 2s var(--ease-smooth) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Sliders ---------- */
+input[type="range"].lufe {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: hsl(var(--shell-line) / 0.6);
+  border-radius: 9999px;
+  outline: none;
+}
+input[type="range"].lufe::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: hsl(var(--lufe-coral));
+  box-shadow: 0 0 12px hsl(var(--lufe-coral) / 0.6);
+  cursor: pointer;
+  transition: transform 120ms var(--ease-smooth);
+}
+input[type="range"].lufe::-webkit-slider-thumb:hover { transform: scale(1.2); }
+input[type="range"].lufe.cyan::-webkit-slider-thumb {
+  background: hsl(var(--lufe-cyan));
+  box-shadow: 0 0 12px hsl(var(--lufe-cyan) / 0.6);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--shell-line) / 0.6);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--shell-line) / 0.9); background-clip: padding-box; }
+
+/* ---------- Drag region for hidden-titlebar Electron ---------- */
+.titlebar-drag { -webkit-app-region: drag; }
+.titlebar-no-drag { -webkit-app-region: no-drag; }
