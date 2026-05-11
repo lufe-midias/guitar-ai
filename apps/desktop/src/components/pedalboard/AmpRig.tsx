@@ -137,7 +137,7 @@ export function AmpRig() {
               boxShadow: "0 0 24px hsl(11 89% 61% / 0.18)",
             }}
           >
-            <div className="absolute -top-12 right-0 h-24 w-24 rounded-full opacity-50"
+            <div className="pointer-events-none absolute -top-12 right-0 h-24 w-24 rounded-full opacity-50"
               style={{ background: "radial-gradient(circle, hsl(11 89% 61%), transparent 70%)" }}
             />
             <div className="flex items-center justify-between">

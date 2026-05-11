@@ -257,7 +257,7 @@ export function PedalboardView() {
                   }}
                 >
                   <div
-                    className="absolute -top-8 right-0 h-16 w-16 rounded-full opacity-30"
+                    className="pointer-events-none absolute -top-8 right-0 h-16 w-16 rounded-full opacity-30"
                     style={{ background: `radial-gradient(circle, ${color}, transparent 70%)` }}
                   />
                   <div
@@ -345,7 +345,7 @@ function PedalCard({ type, params }: { type: string; params: Record<string, any>
       }}
     >
       <div
-        className="absolute -top-12 right-0 h-24 w-24 rounded-full opacity-50"
+        className="pointer-events-none absolute -top-12 right-0 h-24 w-24 rounded-full opacity-50"
         style={{ background: `radial-gradient(circle, ${color}, transparent 70%)` }}
       />
       <div className="t-eyebrow !text-[9px]" style={{ color: color.replace(")", " / 0.85)") }}>

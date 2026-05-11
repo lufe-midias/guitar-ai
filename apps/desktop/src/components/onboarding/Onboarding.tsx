@@ -59,11 +59,11 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
         <div className="hud-grid" />
 
         <div
-          className="absolute -top-32 -left-24 h-72 w-72 rounded-full opacity-50"
+          className="pointer-events-none absolute -top-32 -left-24 h-72 w-72 rounded-full opacity-50"
           style={{ background: "radial-gradient(circle, hsl(11 89% 61%), transparent 70%)" }}
         />
         <div
-          className="absolute -bottom-24 -right-32 h-72 w-72 rounded-full opacity-40"
+          className="pointer-events-none absolute -bottom-24 -right-32 h-72 w-72 rounded-full opacity-40"
           style={{ background: "radial-gradient(circle, hsl(191 75% 44%), transparent 70%)" }}
         />
 
