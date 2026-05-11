@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(node:*)",
+      "Bash(npx:*)",
+      "Bash(yarn:*)",
+      "Bash(pnpm:*)",
+
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pip:*)",
+      "Bash(pip3:*)",
+      "Bash(uv:*)",
+
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(file:*)",
+      "Bash(du:*)",
+      "Bash(df:*)",
+      "Bash(stat:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git tag:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+
+      "Bash(gh repo:*)",
+      "Bash(gh run:*)",
+      "Bash(gh release:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh api:*)",
+
+      "Bash(curl:*)",
+      "Bash(open:*)",
+      "Bash(osascript:*)",
+      "Bash(cliclick:*)",
+      "Bash(screencapture:*)",
+      "Bash(sips:*)",
+      "Bash(qlmanage:*)",
+
+      "Bash(pgrep:*)",
+      "Bash(ps:*)",
+      "Bash(lsof:*)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)",
+
+      "Bash(security find-identity:*)",
+      "Bash(security find-certificate:*)",
+      "Bash(security list-keychains:*)",
+      "Bash(xattr:*)",
+      "Bash(iconutil:*)",
+      "Bash(openssl:*)",
+      "Bash(hdiutil:*)",
+      "Bash(codesign:*)",
+      "Bash(xcrun notarytool:*)",
+      "Bash(xcrun altool:*)",
+
+      "Bash(brew list:*)",
+      "Bash(brew --prefix:*)",
+      "Bash(which:*)",
+
+      "Bash(./scripts/*)",
+      "Bash(bash scripts/*)",
+      "Bash(sh scripts/*)",
+
+      "WebFetch(domain:developer.apple.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:electron.build)",
+      "WebFetch(domain:elastic.co)",
+      "WebFetch(domain:pedalboard.readthedocs.io)",
+      "WebFetch(domain:tonehunt.org)"
+    ],
+    "ask": [
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(rm -rf:*)",
+      "Bash(brew install:*)",
+      "Bash(brew uninstall:*)"
+    ]
+  },
+  "env": {
+    "GUITAR_AI_PORT": "7878",
+    "PYTHONUNBUFFERED": "1"
+  }
+}
