@@ -42,7 +42,7 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
           pip install -e .
-          pip install demucs spotdl pyinstaller cairosvg neural-amp-modeler
+          pip install demucs spotdl pyinstaller neural-amp-modeler
 
       - name: Build engine bundle (PyInstaller)
         working-directory: apps/engine
@@ -53,12 +53,6 @@ jobs:
       - name: Install UI deps
         working-directory: apps/desktop
         run: npm ci
-
-      - name: Build icon
-        working-directory: apps/engine
-        run: |
-          source .venv/bin/activate
-          python ../../scripts/build_icon.py
 
       - name: Build + publish .dmg
         working-directory: apps/desktop
