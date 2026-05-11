@@ -58,12 +58,11 @@ jobs:
         working-directory: apps/desktop
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Optional code-signing secrets — leave unset to ship unsigned builds
-          CSC_LINK: ${{ secrets.MAC_CERTIFICATE_BASE64 }}
-          CSC_KEY_PASSWORD: ${{ secrets.MAC_CERTIFICATE_PASSWORD }}
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          # Code-signing disabled until Apple Developer ID secrets are added.
+          # When you have them, add MAC_CERTIFICATE_BASE64, MAC_CERTIFICATE_PASSWORD,
+          # APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD, APPLE_TEAM_ID as repo secrets
+          # and re-introduce CSC_LINK / etc here.
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
         run: |
           npm run build
           npx electron-builder --mac --publish always
